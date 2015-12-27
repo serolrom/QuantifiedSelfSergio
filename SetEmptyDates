@@ -1,0 +1,68 @@
+/**********************************************************************************************
+ * Set Empty Dates - When the date and time fields are empty, fill them with current date and time
+ **********************************************************************************************/
+function fillEmptyDates() {
+
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var data = sheet.getDataRange().getValues();
+ 
+  //data.sort(1);
+ 
+  var currentRowId = sheet.getMaxRow(); // Row number of the row being attached
+ 
+  
+  var timeStampIndex = 1; // Column A stores the timestamp
+  var dateCellIndex = 3; // Column C stores the date to be populated
+  var timeCellIndex = 4; // Column D stores the time to be populated
+  var qtyCellIndex = 6;  // Column F stores the quantity to be populated (i.e. 1 coffee)
+  
+  var refDate = new Date();
+  var refDateMax = new Date();
+  /*
+  Logger.log(currentRowId);
+  
+  for (var i = 1; i < data.length; i++) // Loop over the rows in the current sheet
+  {
+    refDate = sheet.getRange(i, timeStampIndex).getValue();
+    if (refDate > refDateMax)
+    {
+      currentRowId = i;
+      refDateMax = refDate;
+      Logger.log(currentRowId);
+    }
+  }
+  */
+  var currentDate = new Date();
+  var almanac_day = Utilities.formatDate(currentDate, "GMT+1", "MM/dd/yyyy"); //Date with no time
+  
+  // Fill Date with today's date when it comes empty
+  var dateCell = sheet.getRange(currentRowId, dateCellIndex);
+  var timeCell = sheet.getRange(currentRowId, timeCellIndex);
+  var qttyCell = sheet.getRange(currentRowId, qtyCellIndex);
+  
+  if(dateCell.getValue() == "")
+  {
+    Logger.log("Por awuí");
+    dateCell.setValue(almanac_day); //Fill date with today's date
+  }
+  
+  // Fill Time with current time when it comes empty
+  if(timeCell.getValue() == "")
+  {
+    var currentTime = Utilities.formatDate(currentDate, "GMT+1", "hh:mm:00 a");
+    timeCell.setValue(currentTime);
+  }
+  else 
+  {
+    var newTime = timeCell.getValue();
+    var currentTime = Utilities.formatDate(newTime, "GMT+1", "hh:mm:00 a");
+    timeCell.setValue(currentTime);
+  }
+  /*
+  if(qttyCell.getValue() = "")
+  {
+    qttyCell.setValue(1);
+  }
+  */
+  
+};
