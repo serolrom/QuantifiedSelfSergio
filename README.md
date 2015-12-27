@@ -5,4 +5,4 @@ This solution is based on Google Spreadsheets supported by Google scripts with d
 Currently, FitBit provides mainly sleep data. The user provides the rest of the data easily by just pushing a button in an Android device to maximize speed and ease of use.
 
 2015-12-27
-First iteration. 
+First iteration. Setting up GitHub page. Pending to upload sources.
